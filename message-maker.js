@@ -43,8 +43,9 @@ var timeAgo = function(time){
 	if(current.getDay()-time.getDay() >= 7 ) return "more than a week ago";
 	if(current.getDay()-time.getDay() ) return "more than a day ago";
 	if(current.getHours()-time.getHours() >= 3) return "a few hours ago";
-	if(current.getHours()-time.getHours() ) return "more than an hour ago";
-	if((timeDiff = current.getMinutes()-time.getMinutes()) > 1 ) return timeDiff + " minutes ago";
+	if(current.getHours()-time.getHours() > 1) return "more than an hour ago";
+	if((timeDiff = current.getMinutes()-time.getMinutes()) > 1) return timeDiff + " minutes ago";
+	if(timeDiff < 0) return 60+timeDiff + " minutes ago";
 	return "a moment ago";
 }
 
