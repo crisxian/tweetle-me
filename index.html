@@ -9,31 +9,51 @@
 
 	</head>
 	<body>
-		<nav class="navbar navbar-default"><H1>Tweeter Stream</H1></nav>
-		<button>Newest Messages</button>
+		<nav class="navbar navbar-default"><H1>Tweetle Stream</H1></nav>
+		<button id='update'>Newest Messages</button>
 		<ul class='alltweets'></ul>
 		<script>
 		$(document).ready(function(){
 			var $alltweets = $('.alltweets');
 		// tweets to body
-			var index = messages.homepage.length-1;
-			while(index >= 0){
+			var index = 0;
+			while(index <= messages.homepage.length-1){
 				var msgInfo = messages.homepage[index];
 				var $msgInfo = $('<li class = "tweet">'+
 								 '<span class="user">@' + msgInfo.user + '</span>' + 
 								 '<span class="message">' + msgInfo.message + '</span>' +
-								 '<span class="date">' + timeAgo(msgInfo.created_at) + '</span>' +
+								 '<span class="date" id="'+index+'">' + timeAgo(msgInfo.created_at) + '</span>' +
 								 '</li>'
 								);
-				$msgInfo.appendTo($alltweets);
-				index--;
+				$msgInfo.prependTo($alltweets);
+				index++;
 			}
+			$('#update').click(function(){
+				totalCount = messages.homepage.length-1;
+				if(index === totalCount) return;
+				while(index <= totalCount){
+					var msgInfo = messages.homepage[index];
+					var $msgInfo = $('<li class = "tweet">'+
+									 '<span class="user">@' + msgInfo.user + '</span>' + 
+									 '<span class="message">' + msgInfo.message + '</span>' +
+									 '<span class="date" id="'+index+'">' + timeAgo(msgInfo.created_at) + '</span>' +
+									 '</li>'
+									);
+					$msgInfo.hide().prependTo($alltweets).fadeIn(1000);
+					index++;
+				}
+				var timeIndex = 0;
+				while(timeIndex <= totalCount){
+					$('body').find('#'+timeIndex).text(timeAgo(messages.homepage[timeIndex].created_at));
+					timeIndex++;
+				}
+			});
 		});
 
 		</script>
 	</body>
 <footer>
-  <p>Posted by: Christian Lucas</p>
-  <p>This is an example of a project I've completed.</p>
+  <p>Christian Lucas</p>
+  <p>Twitter Clone with JQuery and BackboneJS</p>
 </footer>
 </html>

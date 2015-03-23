@@ -41,11 +41,15 @@ var timeAgo = function(time){
 	if(current.getMonth()-time.getMonth() >= 2 ) return "months ago";
 	if(current.getMonth()-time.getMonth() ) return "more than a month ago";
 	if(current.getDay()-time.getDay() >= 7 ) return "more than a week ago";
-	if(current.getDay()-time.getDay() ) return "more than a day ago";
-	if(current.getHours()-time.getHours() >= 3) return "a few hours ago";
-	if(current.getHours()-time.getHours() ) return "more than an hour ago";
+	if(current.getDay()-time.getDay() >1) return "more than a day ago";
+	if((timeDiff = current.getHours()-time.getHours()) >= 3) return timeDiff + " hours ago";
+	if(timeDiff < 0) return 24+timeDiff + " hours ago";
+	if(current.getHours()-time.getHours() > 1) return "more than an hour ago";
 	if((timeDiff = current.getMinutes()-time.getMinutes()) > 1 ) return timeDiff + " minutes ago";
-	return "a moment ago";
+	if(timeDiff < 0) return 60+timeDiff + " minutes ago";
+	if((timeDiff = current.getSeconds() - time.getSeconds()) > 1) return timeDiff + " seconds ago";
+	if(timeDiff < 0) return 60+timeDiff + " seconds ago";
+	return "moments ago";
 }
 
 // random function
@@ -79,9 +83,9 @@ while(count){
 }
 messages.homepage.sort(function(timeA,timeB){ return timeA.created_at.getTime()-timeB.created_at.getTime() });
 
-// generate next autoTweet at random times between 1 and 6 seconds
+// generate next autoTweet at random times between 0 and 6 seconds
 var nextTweet = function(){
 	autoTweet();
-	setTimeout(nextTweet, 1000 + Math.random() * 5000);
+	setTimeout(nextTweet, Math.random() * 5000);
 };
 nextTweet();
