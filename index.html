@@ -6,9 +6,20 @@
 	</head>
 	<body>
 		<script>
-		$(document).ready(function){
+		$(document).ready(function(){
+			var $body = $('body');
 		// tweets to body
-		}
+			var index = messages.homepage.length-1;
+			var current = new Date();
+			while(index >= 0){
+				var msgInfo = messages.homepage[index];
+				var $msgInfo = $('<div></div>');
+				$msgInfo.text('@' + msgInfo.user + ': ' + msgInfo.message + ' / ' + timeAgo(msgInfo.created_at));
+				$msgInfo.appendTo($body);
+				index--;
+			}
+		});
+
 		</script>
 	</body>
 
