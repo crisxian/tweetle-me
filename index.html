@@ -1,26 +1,39 @@
 <!DOCTYPE html>
 <html>
 	<head>
+	<link href="styles.css" rel="stylesheet">
 	<script src ='http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js'></script>
 	<script src ='message-maker.js'></script>
+
+	<title>Tweetle Me</title>
+
 	</head>
 	<body>
+		<nav class="navbar navbar-default"><H1>Tweeter Stream</H1></nav>
+		<button>Newest Messages</button>
+		<ul class='alltweets'></ul>
 		<script>
 		$(document).ready(function(){
-			var $body = $('body');
+			var $alltweets = $('.alltweets');
 		// tweets to body
 			var index = messages.homepage.length-1;
-			var current = new Date();
 			while(index >= 0){
 				var msgInfo = messages.homepage[index];
-				var $msgInfo = $('<div></div>');
-				$msgInfo.text('@' + msgInfo.user + ': ' + msgInfo.message + ' / ' + timeAgo(msgInfo.created_at));
-				$msgInfo.appendTo($body);
+				var $msgInfo = $('<li class = "tweet">'+
+								 '<span class="user">@' + msgInfo.user + '</span>' + 
+								 '<span class="message">' + msgInfo.message + '</span>' +
+								 '<span class="date">' + timeAgo(msgInfo.created_at) + '</span>' +
+								 '</li>'
+								);
+				$msgInfo.appendTo($alltweets);
 				index--;
 			}
 		});
 
 		</script>
 	</body>
-
+<footer>
+  <p>Posted by: Christian Lucas</p>
+  <p>This is an example of a project I've completed.</p>
+</footer>
 </html>

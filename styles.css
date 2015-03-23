@@ -1,0 +1,27 @@
+.alltweets{
+	width: 50%;
+}
+
+.tweet{
+	margin: 0px;
+	padding: 10px 10px 30px 10px;
+	outline-color: LightGray;
+	outline-style: solid;
+	position: relative;
+}
+
+.user{
+	font-weight: bold;
+}
+
+.message{
+	position: absolute;
+	bottom: 10px;
+	left: 20px;
+	line-height: 5px
+}
+
+.date{
+	font-style: italic;
+	float: right;
+}
