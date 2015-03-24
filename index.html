@@ -1,29 +1,44 @@
 <!DOCTYPE html>
 <html>
 	<head>
-	<link href="styles.css" rel="stylesheet">
-	<script src ='http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js'></script>
+	<script src='js/jquery.min.js'></script>
 	<script src ='message-maker.js'></script>
+	<link rel='stylesheet' href='css/bootstrap.min.css'>
+	<script src='js/bootstrap.min.js'></script>
+	<link href='styles.css' rel='stylesheet'>
 
 	<title>Tweetle Me</title>
 
 	</head>
 	<body>
-		<nav class="navbar navbar-default"><H1>Tweetle Stream</H1></nav>
-		<button id='update'>Newest Messages</button>
-		<ul class='alltweets'></ul>
+		<div class='container'>
+			<H1>Tweetle Stream</H1>
+			
+			<div class='row-fluid'>
+			  <div class='col-sm-4 now-viewing-box'>
+			  	<H4>Now Viewing</H4>
+			  	<p id='view-name'>All Tweets</p>
+			  </div>
+			  <div class='col-sm-1'></div>
+			  <div class='col-sm-7 tweet-box'>
+			  	<H3>Latest Tweets</H3>
+			  	<button type="button" class=­"btn btn-default" id='update'>Newest Messages</button>
+			    <div class='alltweets'></div>
+			  </div>
+			</div>
+		</div>
 		<script>
 		$(document).ready(function(){
-			var $alltweets = $('.alltweets');
+			var $alltweets = $('body').find('.alltweets');
 		// tweets to body
 			var index = 0;
 			while(index <= messages.homepage.length-1){
 				var msgInfo = messages.homepage[index];
-				var $msgInfo = $('<li class = "tweet">'+
+				var $msgInfo = $('<div class = "tweet">'+
 								 '<span class="user">@' + msgInfo.user + '</span>' + 
 								 '<span class="message">' + msgInfo.message + '</span>' +
 								 '<span class="date" id="'+index+'">' + timeAgo(msgInfo.created_at) + '</span>' +
-								 '</li>'
+								 '</div>'
 								);
 				$msgInfo.prependTo($alltweets);
 				index++;
@@ -33,11 +48,11 @@
 				if(index === totalCount) return;
 				while(index <= totalCount){
 					var msgInfo = messages.homepage[index];
-					var $msgInfo = $('<li class = "tweet">'+
+					var $msgInfo = $('<div class = "tweet">'+
 									 '<span class="user">@' + msgInfo.user + '</span>' + 
 									 '<span class="message">' + msgInfo.message + '</span>' +
 									 '<span class="date" id="'+index+'">' + timeAgo(msgInfo.created_at) + '</span>' +
-									 '</li>'
+									 '</div>'
 									);
 					$msgInfo.hide().prependTo($alltweets).fadeIn(1000);
 					index++;
@@ -51,9 +66,9 @@
 		});
 
 		</script>
+		<footer>
+		  <p>Christian Lucas</p>
+		  <p>Twitter Clone with JQuery and Bootstrap</p>
+		</footer>
 	</body>
-<footer>
-  <p>Christian Lucas</p>
-  <p>Twitter Clone with JQuery and BackboneJS</p>
-</footer>
 </html>

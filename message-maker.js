@@ -47,7 +47,7 @@ var timeAgo = function(time){
 	if(current.getHours()-time.getHours() > 1) return "more than an hour ago";
 	if((timeDiff = current.getMinutes()-time.getMinutes()) > 1 ) return timeDiff + " minutes ago";
 	if(timeDiff < 0) return 60+timeDiff + " minutes ago";
-	if((timeDiff = current.getSeconds() - time.getSeconds()) > 1) return timeDiff + " seconds ago";
+	if((timeDiff = current.getSeconds() - time.getSeconds()) > 0) return timeDiff + " seconds ago";
 	if(timeDiff < 0) return 60+timeDiff + " seconds ago";
 	return "moments ago";
 }
